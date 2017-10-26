@@ -1,0 +1,10 @@
+<% @questionsPaging.each do |question| %>
+	
+	$('#questions-list').append("<%= escape_javascript  render 'question', p:question  %>");
+
+<% end %>
+
+
+localStorage.page = <%= @page+1 %>;
+localStorage.count = <%= @count %>
+questionsAjax = undefined; 

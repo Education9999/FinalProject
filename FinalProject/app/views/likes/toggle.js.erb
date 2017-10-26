@@ -1,0 +1,49 @@
+console.log("Hi Shivam");
+if(<%= @like.student_id %> == <%=current_student.id%>)
+{
+
+if( "<%= @like.likeable_type %>" == "Question")
+{
+	if($("#NoOfLikes-question-<%= @like.likeable_id %> button a i").hasClass("fa-thumbs-up"))
+	{
+		$("#NoOfLikes-question-<%= @like.likeable_id %> button a i").removeClass("fa-thumbs-up").addClass("fa-thumbs-down");
+			noty({
+			text:"You Liked a Question",
+			type:"success",
+			timeout:1000
+		});
+	}
+	else{
+		$("#NoOfLikes-question-<%= @like.likeable_id %> button a i").removeClass("fa-thumbs-down").addClass("fa-thumbs-up");
+		noty({
+			text:"You unliked a Question",
+			type:"success",
+			timeout:1000
+		});
+	}
+	$("#NoOfLikes-question-<%= @like.likeable_id %> span").html("Likes <%= Like.where(likeable_type:"Question",likeable_id:@like.likeable_id).length %>");
+	
+}
+else if( "<%= @like.likeable_type %>" == "Answer"){
+
+	if($("#NoOfLikes-answer-<%= @like.likeable_id %> button a i").hasClass("fa-thumbs-up"))
+	{
+		$("#NoOfLikes-answer-<%= @like.likeable_id %> button a i").removeClass("fa-thumbs-up").addClass("fa-thumbs-down");
+		noty({
+			text:"You Liked a Answer",
+			type:"success",
+			timeout:1000
+		});
+	}
+	else{
+		$("#NoOfLikes-answer-<%= @like.likeable_id %> button a i").removeClass("fa-thumbs-down").addClass("fa-thumbs-up");
+		noty({
+			text:"You unliked a Answer",
+			type:"success",
+			timeout:1000
+		});
+	}
+
+	$("#NoOfLikes-answer-<%= @like.likeable_id %> span").html("Likes <%= Like.where(likeable_type:"Answer",likeable_id:@like.likeable_id).length %>");
+}
+}

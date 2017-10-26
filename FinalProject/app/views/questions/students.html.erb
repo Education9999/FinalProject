@@ -1,0 +1,40 @@
+
+
+
+<div id="students-display">
+	<div>
+	   <h3>Friend Request Sent</h3>
+	   <hr>
+		<% @students.each do |u|%>
+		<%if(u!=current_student && Friendship.find_by(student_id:current_student.id,friend_id:u.id,confirmed:false)!=nil && Friendship.find_by(student_id:u.id,friend_id:current_student.id,confirmed:false)==nil )%>
+		<p><%= u.email%></p>
+		<button class="Students-button small"><%= link_to "View Profile",  "/students/student_profile/#{u.id}", method: :get %></button>
+		<hr>
+		<%end%>
+		<%end%>
+	</div>
+
+	<div>
+		<h3>Friend Request Pending</h3>
+		<hr>
+		<% @students.each do |u|%>
+		<%if(u!=current_student && Friendship.find_by(student_id:u.id,friend_id:current_student.id,confirmed:false)!=nil && Friendship.find_by(student_id:current_student.id,friend_id:u.id,confirmed:false)==nil)%>
+		<p><%= u.email%></p> <button id="friend-<%= u.id %>" class="Students-button small"><%= link_to "Accept Friend Request", AddFriend_path(1,u.email), remote: true, method: :get %></button>
+		 <button class="Students-button small"><%= link_to "View Profile",  "/students/student_profile/#{u.id}", method: :get %></button>
+		<hr>
+		<%end%>
+		<%end%>
+	</div>
+	
+	<div>
+		<h3>Students Not Your Friend</h3>
+		<hr>
+		<% @students.each do |u|%>
+		<%if(u!=current_student && Friendship.find_by(student_id:current_student.id,friend_id:u.id)==nil && Friendship.find_by(student_id:u.id,friend_id:current_student.id)==nil)%>
+		<p><%= u.email%></p><button id="friend-<%= u.id %>" class="Students-button small"><%= link_to "Send Friend Request", AddFriend_path(2,u.email), remote: true, method: :get %></button>
+		<button class="Students-button small"><%= link_to "View Profile",  "/students/student_profile/#{u.id}", method: :get %></button>
+		<hr>
+		<%end%>
+		<%end%>
+	</div>
+</div>

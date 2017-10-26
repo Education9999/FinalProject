@@ -1,0 +1,175 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+#profile-page{
+    width:70%;
+    margin:auto;
+    margin-left:28%;
+    #profile_image img{
+        width: 200px;
+    border-radius: 75px;
+    position: absolute;
+    top: 75px;
+    left: 20px;
+    }
+}
+
+#private-questions{
+    margin-top:13%;
+    h3{
+        text-align:center;
+    }
+}
+
+.email-style{
+	color: #5b5bfa;
+    font-weight: bold;
+    font-family: sans-serif;
+    margin:0;
+
+}
+
+ h3{
+ 	font-family: sans-serif;
+ }
+
+ .small-pp img{
+ 	height:50px;
+ 	width:50px;
+ 	border-radius: 30px;
+ 	margin-top: -10px;
+ }
+ #my-profile-pic{
+ 	height: 200px;
+ }
+
+#all-students{
+	width: 70%;
+    margin: auto;
+}
+#all-friend-div{
+	display:flex;
+	p{
+		margin:0;
+	}
+}
+ main{
+ 	display: flex;
+    justify-content: space-around;
+    margin-top:30px;
+    #question-div{
+    	width: 80%;
+    }
+ }
+ .del{
+ 	height: 24px;
+ }
+ .Students-button{
+ 	display: block;
+    margin: 10px auto;
+    border: none;
+    color: white;
+    background-color: #5b5bfa;
+    display: inline-block;
+    a{
+    	color: white;
+	    text-decoration: none;
+	    font-weight: bold;
+	    font-size: 17px;
+    }
+ }
+ .small{
+ 	margin:0;
+ 	a{
+
+    	font-size: 11px;
+    
+ 	}
+ }
+ .ubut{
+ 	display:block;
+ }
+
+
+ body{
+ 	padding: 0;
+ 	margin: 0;
+ }
+
+ #body-header{
+ 	padding: 0 15px;
+ 	display: flex;
+ 	flex-direction: row;
+ 	justify-content: space-between;
+ 	background-color: #5b5bfa;
+    height: 64px;
+    main{
+    	margin-top: 30px;
+    }
+
+ 	#page-logo{
+ 		width: 75px;
+
+ 		img{
+ 			width: 100%;
+ 			height: 50px;
+    		width: 50px;
+   			padding-top: 3px;
+ 		}
+ 	}
+
+
+ 	#auth-links{
+
+ 		ul{
+ 			list-style: none;
+ 			display: flex;
+ 			flex-direction: row;
+ 			justify-content: flex-end;
+ 			margin-top: 0px;
+
+ 			li{
+ 				margin-left: 8px;
+ 				p{
+ 					margin-left: 5px;
+				    margin-right: 5px;
+				    font-weight: bold;
+				    color: white;
+				    font-family: sans-serif;
+				    a{
+				    	margin-left: 5px;
+				    margin-right: 5px;
+				    font-weight: bold;
+				    color: white;
+				    font-family: sans-serif;
+				    }
+ 				}
+ 				input{
+ 					margin-top: 10px;
+				    height: 25px;
+				    width: 300px;
+				    padding-left: 5px;
+ 				}
+
+ 				a{
+ 					text-decoration: none;
+ 					color: black;
+ 				}
+ 			}
+ 		}
+ 	}
+
+ }

@@ -1,0 +1,89 @@
+<main>
+
+	<div id="trending-news" class="animated fadeInLeft">
+		<h3>Trending News</h3>
+		<hr>
+	</div>
+	<div id="question-div">
+	<% if student_signed_in? %>
+	
+	<div id="new-question-form-container">
+		<%= form_for @question, remote: true do |f| %>
+			<%= f.label :content, "Make Question" %>
+			<%= f.text_area :content, placeholder: "What's in your mind" %>
+			<%= f.submit %>
+		<% end %>
+	</div>
+	<% end %>
+
+	<div id="questions-list-container">
+		<ul id="questions-list">
+			<% @questions.each do |question| %>
+				<%= render 'question', p: question %>
+			<% end %>
+		</ul>
+	</div>
+	</div>
+
+
+	
+	<div id="All-friends" class="animated fadeInRight">
+	<% if student_signed_in? %>
+	
+
+	<button  class="Students-button ubut"><%= link_to "Friend Requests", '/allstudents' , method: :question %></button>
+	<h3 id="friend-list-button">Friend List</h3>
+	<hr>
+	<% Friendship.where(confirmed:true).each do |fr|%>
+	<div id= "friend-<%= fr.id%>" >
+	<div id="all-friend-div">
+	<% if (fr.student = current_student)%>
+	<p class="email-style"><%= fr.friend.email%> &nbsp;</p>
+	<%elsif(fr.friend = current_student)%>
+	<p class="email-style"><%= fr.student.email%> &nbsp;</p>
+	<%end%>
+	<p class="question-destroy-link">
+			<!-- <a data-remote="true" rel="nofollow" data-method="delete" href="/deletefriend/#{fr.id}">X</a> -->
+			<button  class="Students-button ubut small"><%= link_to "Un-Friend", "/deletefriend/#{fr.id}" ,remote: true, method: :delete %></button>
+		</p>
+		
+	</div>
+	</div>
+	<hr>
+	<%end%>
+	<%end%>
+	</div>
+
+	<script type="text/javascript">
+	localStorage.page = 2;
+	localStorage.count = <%= @count %>;
+	initialScroll = 0;
+	var questionsAjax;
+	function getQuestions(){
+		questionsAjax = $.ajax({
+			type: 'GET',
+			url: '/',
+			data: {
+				page: localStorage.page,
+				count: localStorage.count
+			},
+			dataType: 'script',
+		});
+	}
+
+	$(window).scroll(function(){
+
+		if (window.scrollY > initialScroll + 300 && questionsAjax == undefined){
+			getQuestions();
+			initialScroll = window.scrollY;
+		}
+
+	});
+
+
+</script>
+
+	
+	
+
+</main>

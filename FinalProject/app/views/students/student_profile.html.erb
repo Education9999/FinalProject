@@ -1,0 +1,38 @@
+<div id="profile-page">
+<h3>Welcome To Student Profile of <%= @student.email %> </h3>
+<p>Email : <%= @student.email%></p>
+
+<%if (current_student== @student)%>
+<button class="Students-button small"><%= link_to "Edit Profile", '/students/edit' , method: :get %></button>
+<%end%>
+
+<%if(current_student!=@student)%>
+
+	<%if(Friendship.find_by(student_id:current_student.id,friend_id:@student.id,confirmed:false)!=nil && Friendship.find_by(student_id:@student.id,friend_id:current_student.id,confirmed:false)==nil )%>
+
+	<%elsif(Friendship.find_by(student_id:@student.id,friend_id:current_student.id,confirmed:false)!=nil && Friendship.find_by(student_id:current_student.id,friend_id:@student.id,confirmed:false)==nil) 
+		%>
+		<button id="friend-<%= @student.id %>" class="Students-button small"><%= link_to "Accept Friend Request", AddFriend_path(1,@student.email), remote: true, method: :get %></button>
+
+	<%elsif (Friendship.find_by(student_id:current_student.id,friend_id:@student.id)==nil && Friendship.find_by(student_id:@student.id,friend_id:current_student.id)==nil)
+		%>
+		<button id="friend-<%= @student.id %>" class="Students-button small"><%= link_to "Send Friend Request", AddFriend_path(2,@student.email), remote: true, method: :get %></button>
+	<%end%>
+<%end%>
+</div>
+<%if(current_student==@student)%>
+<div id="private-questions">
+	<h3>All Your Questions</h3>
+	<div id="questions-list-container">
+		<ul id="questions-list">
+			<% Question.where(student:current_student).each do |question| %>
+				<%= render 'questions/question', p: question %>
+			<% end %>
+		</ul>
+	</div>
+
+</div>
+<%end%>
+
+
+	

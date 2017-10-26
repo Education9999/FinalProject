@@ -1,0 +1,24 @@
+			<li id="answer-<%= com.id %>">
+				<div>
+					<span class="question-name answer-name">
+						<%= com.student.email%>&nbsp;
+					</span>&nbsp; &nbsp;
+					<p class="question-time"><%= time_ago_in_words(com.updated_at)  %></p>
+					<hr>
+					<p class="question-content-main answer-content-main">
+					<%= com.content %>
+					</p>
+					
+				</div>
+				<% if student_signed_in? %>
+					<button  class="Students-button small del"><%= link_to '<i class="fa fa-trash fa-2x" aria-hidden="true"></i>'.html_safe, answer_path(com.id) ,remote: true, method: :delete %></button>
+				 <div id="NoOfLikes-answer-<%= com.id %>">
+				  <% if(Like.find_by(student:current_student,likeable_type:"Answer",likeable_id:com.id)==nil)%>
+						<button id="like-button" class="Students-button small"><%= link_to '<i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i> '.html_safe, likeToggle_path(com.id,"Answer"),:id => "my-link", remote: true,  method: :post %></button>
+					<%else%>
+						<button id="unlike-button" class="Students-button small"><%= link_to '<i class="fa fa-thumbs-down fa-2x" aria-hidden="true"></i> '.html_safe, likeToggle_path(com.id,"Answer"),:id => "my-link", remote: true,  method: :post %></button>
+					<%end%>
+				<span>Likes <%= Like.where(likeable_type:"Answer",likeable_id:com.id).length %></span>
+				</div> 
+				<%end%>
+			</li>

@@ -1,0 +1,18 @@
+
+
+if(!<%= @question.content.empty? %>)
+{
+$('#questions-list').prepend("<%= escape_javascript  render 'question', p: @question %>");
+noty({
+	text:"Question Created Successfully",
+	type:"success",
+	timeout:2000
+});
+}
+else{
+	noty({
+	text:"Please enter some text",
+	type:"error",
+	timeout:2000
+});
+}

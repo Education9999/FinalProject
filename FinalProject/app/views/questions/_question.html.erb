@@ -1,0 +1,89 @@
+<li id="question-<%= p.id %>" class="question wow animated fadeInUp">
+	<div class="question-content">
+		<div class="text">
+			<span class="question-name">
+				<%= p.student.email%>&nbsp;
+			</span>
+			<span class="question-time"><%= time_ago_in_words(p.updated_at)  %></span>
+			<hr>
+			<p class="question-content-main">
+				<%= p.content %>
+			</p>
+			<!-- <p class="author-details">
+				<%= p.student.email%> at <%= p.created_at %>
+			</p>
+ -->
+
+			 <div id="NoOfLikes-question-<%= p.id %>">
+			 <% if student_signed_in? %>
+			 <% if(Like.find_by(student:current_student,likeable_type:"Question",likeable_id:p.id)==nil)%>
+				<button id="like-button" class="Students-button small"><%= link_to '<i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i> '.html_safe, likeToggle_path(p.id,"Question"),:id => "my-link", remote: true,  method: :post %></button>
+			<%else%>
+				<button id="unlike-button" class="Students-button small"><%= link_to '<i class="fa fa-thumbs-down fa-2x" aria-hidden="true"></i>'.html_safe, likeToggle_path(p.id,"Question"),:id => "my-link", remote: true,  method: :post %></button>
+			<%end%>
+				<span>Likes <%= Like.where(likeable_type:"Question",likeable_id:p.id).length %></span>
+				<%end%>
+			</div> 
+
+
+		</div> 
+		<% if student_signed_in? %>
+		
+			<button  class="Students-button small del"><%= link_to '<i class="fa fa-trash fa-2x" aria-hidden="true"></i>'.html_safe, question_path(p.id) ,remote: true, method: :delete %></button>
+			
+		
+		<%end%>
+	</div>
+
+
+	<div class="question-answers-container">
+		<% if student_signed_in? %>
+		<% @answer= Answer.new %>
+		<%= form_for @answer, remote: true do |f| %>
+			<%= f.hidden_field :question_id, value: p.id %>
+			<%= f.text_area :content, placeholder: "Add Answer" %>
+			<%= f.submit "Add" %>
+		<% end %>
+		<%end%>
+		<input id="answers-button-<%= p.id %>" class="Students-button" type="button" name="Answers" value="Show">
+		<span class="question-time"><%= p.answers.length%> answers</span>
+		<ul id="answers-list-<%= p.id %>" class="answers-list">
+		
+			<% p.answers.each do |com| %>
+			<!-- <li>
+				<div>
+					<p>
+					<%= com.content %>
+					</p>
+					<p class="author-details"><%= com.student.email%> at <%= com.created_at %>
+					</p>
+				</div>
+				
+				<p class="answer-destroy-link">
+					<%= link_to "X", answer_path(com.id), method: :delete %>
+				</p>
+			</li> -->
+			<%= render 'answers/answer', com: com %>
+			<hr>
+			<% end %>
+		</ul>
+		<script type="text/javascript">
+			function displayAnswers(){
+			console.log("hi");
+			if($("#answers-button-<%= p.id%>" ).val()=="Show")
+			{
+			$("#answers-list-<%= p.id%>").css('display',"block");
+			$("#answers-button-<%= p.id%>" ).val("Hide");
+			}
+			else{
+				$("#answers-list-<%= p.id%>").css('display',"none");
+				$("#answers-button-<%= p.id%>" ).val("Show");
+			}
+		}
+			
+		
+		$('#answers-button-<%= p.id%>').click(displayAnswers);
+    		
+		</script>
+	</div>
+</li>

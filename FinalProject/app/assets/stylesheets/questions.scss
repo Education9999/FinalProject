@@ -1,0 +1,183 @@
+// Place all the styles related to the Questions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#trending-news{
+	width:25%;
+	margin-left:10px;
+}
+
+.question-name{
+	font-weight: bold;
+    font-family: sans-serif;
+}
+.question-time{
+	font-size: 13px;
+    color: #2b2a2a;
+}
+.question-content-main{
+	font-size: 16px;
+    background-color: #e1f1ff;
+}
+#students-display{
+	display: flex;
+    justify-content: space-evenly;
+}
+
+#new-question-form-container{
+	
+    width: 75%;
+    
+    text-align: center;
+    margin: 0 auto;
+
+    label{
+    	display: block;
+    	font-family: sans-serif;
+    	font-weight: bold;
+    }
+
+    textarea, input[type="submit"]{
+    	display: block;
+    	margin: 0 auto;
+
+    }
+
+    textarea{
+    	width: 85%;
+    	
+    	border-radius: 20px;
+    	padding-left: 10px;
+    }
+
+    input[type="submit"]{
+	    margin: 10px auto;
+	    border: none;
+	    color: white;
+	    background-color: #5b5bfa;
+    }
+}
+
+#questions-list-container{
+
+	width: 70%;
+	margin: 0 auto;
+	
+	#questions-list{
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+
+		.question{
+			transition: all .2s ease-in-out; 
+			border-bottom: 1px solid grey;
+			border: solid #3744ff 2px;
+			margin-bottom:10px;
+			border-radius: 20px;
+			.question-content{
+				display: flex;
+				justify-content: space-between;
+				font-size: 0.9rem;
+				padding: 14px;
+			    background-color: #dffff7;
+			    border-radius: 40px;
+
+				.text{
+					width: 95%;
+				}
+
+				.question-destroy-link{
+					margin: 0;
+				}
+				.question-destroy-link a{
+					text-decoration: none;
+					color: red;
+				}
+			}
+
+			.question-answers-container{
+				width: 80%;
+			    margin: 10px auto;
+			    
+			     input[type="submit"]{
+			     	margin: 10px auto;
+				    border: none;
+				    width: 34px;
+				    color: white;
+				    background-color: #5b5bfa;
+			     }
+
+			    form{
+			    	display: flex;
+
+			    	input, textarea{
+			    		width: 100%;
+    					border-radius: 20px;
+    					padding: 5px;
+		    		}
+			    }
+
+			    .answers-list{
+			    	display:none;
+			    	list-style: none;
+			    	padding-top: 10px;
+			    	padding-left: 0;
+		    	    background-color: rgba(255, 160, 122, 0.35);
+    				padding: 5px;
+    				background-color: #c2d4f3;
+    				border-radius: 20px;
+			    	li{
+			    		margin: 3px;
+    					padding: 3px;
+    					display: flex;
+    					justify-content: space-between;
+			    		p{
+			    			margin: 0;
+			    		}
+
+			    		a{
+
+			    			text-decoration: none;
+			    			font-size: 10px;
+			    		}
+			    	}
+
+			    }
+			}
+
+		}
+		
+
+
+	}
+}
+
+
+
+.author-details{
+	font-size: 10px;
+}
+
+
+.answer-name{
+	font-size:10px;
+}
+.answer-content-main{
+	font-size:14px;
+}
+
+@media(max-width:670px)
+{
+	#All-friends{
+		display:none;
+	}
+
+}
+#All-friends{
+	width:25%;
+}
+
+
+
+

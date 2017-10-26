@@ -1,14 +1,100 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>FinalProject</title>
+  <title>Allsocial</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'components/test', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'components/test', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-noty/2.4.1/packaged/jquery.noty.packaged.min.js"></script>
+   <script type="text/javascript" src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+  <meta name="viewport" content="initial-scale=1.0, width=device-width">
+  <script src="https://use.fontawesome.com/d8db4744cb.js"></script>
+   <link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+  
+
 </head>
 <body>
 
+	<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1928173687423462',
+      xfbml      : true,
+      version    : 'v2.10'
+    });
+    FB.AppEvents.logPageView();
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+ 
+	<header id="body-header" class="animated fadeInDown">
+		<div id="page-logo">
+			<%= link_to "/" do%>
+				<%= image_tag("facebook-logo.png") %>
+			<% end %>
+			
+		</div>
+
+		<div id="auth-links">
+			<ul>
+				<% if !student_signed_in? %>
+					<% if !current_page?(new_student_session_path) %>
+					
+					<li>
+						<p>
+							<%= link_to "Sign In", new_student_session_path %>
+						</p>
+					</li>
+					<% end %>
+					<% if !current_page?(new_student_registration_path) %>
+					<li>
+						<p>
+							<%= link_to "Sign Up", new_student_registration_path %>
+						</p>
+					</li>
+					<% end %>
+				<% else %>
+				<li>
+					<input id="search_student" type="text" name="seach" placeholder="search here">
+				</li>
+
+				
+				<li>
+					<p><%= current_student.name%></p>
+				</li>
+				
+				<li>
+					<p><%= link_to "View Profile",  "/students/student_profile/#{current_student.id}", method: :get %></p>
+				</li>
+				
+				<li>
+					<p><%= link_to "Edit Profile", '/students/edit' , method: :get %></p>
+				</li>
+				<li>
+					<p><%= link_to "Sign Out", destroy_student_session_path, method: :delete %></p>
+				</li>
+				<% end %>
+				
+			</ul>
+		</div>
+	</header>
+
 <%= yield %>
+ <script>
+              new WOW().init();
+              </script>
 
 </body>
 </html>

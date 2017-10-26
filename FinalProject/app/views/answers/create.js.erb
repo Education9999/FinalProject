@@ -1,0 +1,6 @@
+$('#question-<%= @answer.question_id %> .answers-list').prepend("<%= escape_javascript  render 'answers/answer', com: @answer %>");
+noty({
+	text:"Answer Created Successfully",
+	type:"success",
+	timeout:2000
+})
